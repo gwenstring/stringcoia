@@ -7,763 +7,147 @@
   <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet"/>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
     :root {
-      --blue:       #1a6bff;
-      --blue-light: #5b9fff;
-      --blue-pale:  #e8f2ff;
-      --navy:       #0d1f4e;
-      --dark:       #070f22;
-      --gold:       #ffd600;
-      --white:      #ffffff;
-      --off:        #f5f8ff;
-      --muted:      #6b8ccc;
-      --border:     #dce8f8;
-      --text:       #1a2a4a;
+      --blue: #1a6bff; --blue-light: #5b9fff; --blue-pale: #e8f2ff;
+      --navy: #0d1f4e; --dark: #070f22; --gold: #ffd600;
+      --white: #ffffff; --off: #f5f8ff; --muted: #6b8ccc;
+      --border: #dce8f8; --text: #1a2a4a;
     }
-
     html { scroll-behavior: smooth; }
-
-    body {
-      font-family: 'DM Sans', sans-serif;
-      color: var(--text);
-      background: var(--white);
-      overflow-x: hidden;
-    }
-
-    /* ── NAV ──────────────────────────────────────────────── */
-    nav {
-      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 0 48px;
-      height: 72px;
-      background: rgba(255,255,255,0.92);
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid var(--border);
-    }
-
-    .nav-logo {
-      display: flex; align-items: center; gap: 12px;
-      text-decoration: none;
-    }
-
-    .nav-wordmark {
-      font-family: 'Syne', sans-serif;
-      font-size: 20px; font-weight: 800;
-      color: var(--navy); letter-spacing: -0.3px;
-    }
+    body { font-family: 'DM Sans', sans-serif; color: var(--text); background: var(--white); overflow-x: hidden; }
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 0 48px; height: 72px; background: rgba(255,255,255,0.92); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); }
+    .nav-logo { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+    .nav-wordmark { font-family: 'Syne', sans-serif; font-size: 20px; font-weight: 800; color: var(--navy); letter-spacing: -0.3px; }
     .nav-wordmark span { color: var(--blue); }
-
-    .nav-links {
-      display: flex; align-items: center; gap: 36px;
-      list-style: none;
-    }
-    .nav-links a {
-      font-size: 14px; font-weight: 400;
-      color: var(--text); text-decoration: none;
-      transition: color 0.2s;
-    }
+    .nav-links { display: flex; align-items: center; gap: 36px; list-style: none; }
+    .nav-links a { font-size: 14px; font-weight: 400; color: var(--text); text-decoration: none; transition: color 0.2s; }
     .nav-links a:hover { color: var(--blue); }
-
-    .nav-cta {
-      background: var(--blue); color: var(--white) !important;
-      padding: 10px 22px; border-radius: 100px;
-      font-weight: 500 !important;
-      transition: background 0.2s !important;
-    }
-    .nav-cta:hover { background: #0d52d4 !important; color: var(--white) !important; }
-
-    /* ── HERO ─────────────────────────────────────────────── */
-    .hero {
-      min-height: 100vh;
-      background: var(--dark);
-      display: flex; align-items: center;
-      position: relative; overflow: hidden;
-      padding: 120px 48px 80px;
-    }
-
-    .hero-grid {
-      position: absolute; inset: 0;
-      background-image:
-        linear-gradient(rgba(26,107,255,0.06) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(26,107,255,0.06) 1px, transparent 1px);
-      background-size: 48px 48px;
-    }
-
-    .hero-glow {
-      position: absolute;
-      width: 600px; height: 600px;
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(26,107,255,0.18) 0%, transparent 70%);
-      top: -100px; right: -100px;
-      pointer-events: none;
-    }
-
-    .hero-glow2 {
-      position: absolute;
-      width: 400px; height: 400px;
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(255,214,0,0.07) 0%, transparent 70%);
-      bottom: 0; left: 200px;
-      pointer-events: none;
-    }
-
-    .hero-inner {
-      max-width: 1100px; margin: 0 auto; width: 100%;
-      position: relative; z-index: 2;
-      display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center;
-    }
-
-    .hero-badge {
-      display: inline-flex; align-items: center; gap: 8px;
-      background: rgba(26,107,255,0.15);
-      border: 1px solid rgba(26,107,255,0.3);
-      color: #7ab4ff;
-      font-size: 12px; font-weight: 500; letter-spacing: 0.08em;
-      text-transform: uppercase;
-      padding: 6px 14px; border-radius: 100px;
-      margin-bottom: 28px;
-    }
-
-    .hero-badge-dot {
-      width: 6px; height: 6px; border-radius: 50%;
-      background: var(--gold);
-      animation: pulse 2s ease-in-out infinite;
-    }
-
-    @keyframes pulse {
-      0%, 100% { opacity: 1; transform: scale(1); }
-      50% { opacity: 0.5; transform: scale(0.7); }
-    }
-
-    .hero h1 {
-      font-family: 'Syne', sans-serif;
-      font-size: clamp(2.8rem, 5vw, 4.2rem);
-      font-weight: 800; line-height: 1.08;
-      color: var(--white);
-      margin-bottom: 24px;
-      letter-spacing: -1.5px;
-    }
-
-    .hero h1 em {
-      font-style: normal; color: var(--blue);
-    }
-
-    .hero-sub {
-      font-size: 1.1rem; font-weight: 300;
-      color: rgba(255,255,255,0.55);
-      line-height: 1.7; margin-bottom: 40px;
-      max-width: 460px;
-    }
-
-    .hero-actions {
-      display: flex; gap: 14px; flex-wrap: wrap;
-    }
-
-    .btn-primary {
-      display: inline-flex; align-items: center; gap: 8px;
-      background: var(--blue); color: var(--white);
-      font-family: 'DM Sans', sans-serif;
-      font-size: 15px; font-weight: 500;
-      padding: 14px 28px; border-radius: 100px;
-      text-decoration: none;
-      transition: background 0.2s, transform 0.15s;
-    }
+    .nav-cta { background: var(--blue); color: var(--white) !important; padding: 10px 22px; border-radius: 100px; font-weight: 500 !important; transition: background 0.2s !important; }
+    .nav-cta:hover { background: #0d52d4 !important; }
+    .hero { min-height: 100vh; background: var(--dark); display: flex; align-items: center; position: relative; overflow: hidden; padding: 120px 48px 80px; }
+    .hero-grid { position: absolute; inset: 0; background-image: linear-gradient(rgba(26,107,255,0.06) 1px, transparent 1px), linear-gradient(90deg, rgba(26,107,255,0.06) 1px, transparent 1px); background-size: 48px 48px; }
+    .hero-glow { position: absolute; width: 600px; height: 600px; border-radius: 50%; background: radial-gradient(circle, rgba(26,107,255,0.18) 0%, transparent 70%); top: -100px; right: -100px; pointer-events: none; }
+    .hero-glow2 { position: absolute; width: 400px; height: 400px; border-radius: 50%; background: radial-gradient(circle, rgba(255,214,0,0.07) 0%, transparent 70%); bottom: 0; left: 200px; pointer-events: none; }
+    .hero-inner { max-width: 1100px; margin: 0 auto; width: 100%; position: relative; z-index: 2; display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+    .hero-badge { display: inline-flex; align-items: center; gap: 8px; background: rgba(26,107,255,0.15); border: 1px solid rgba(26,107,255,0.3); color: #7ab4ff; font-size: 12px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; padding: 6px 14px; border-radius: 100px; margin-bottom: 28px; }
+    .hero-badge-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--gold); animation: pulse 2s ease-in-out infinite; }
+    @keyframes pulse { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.5; transform: scale(0.7); } }
+    .hero h1 { font-family: 'Syne', sans-serif; font-size: clamp(2.8rem, 5vw, 4.2rem); font-weight: 800; line-height: 1.08; color: var(--white); margin-bottom: 24px; letter-spacing: -1.5px; }
+    .hero h1 em { font-style: normal; color: var(--blue); }
+    .hero-sub { font-size: 1.1rem; font-weight: 300; color: rgba(255,255,255,0.55); line-height: 1.7; margin-bottom: 40px; max-width: 460px; }
+    .hero-actions { display: flex; gap: 14px; flex-wrap: wrap; }
+    .btn-primary { display: inline-flex; align-items: center; gap: 8px; background: var(--blue); color: var(--white); font-family: 'DM Sans', sans-serif; font-size: 15px; font-weight: 500; padding: 14px 28px; border-radius: 100px; text-decoration: none; transition: background 0.2s, transform 0.15s; }
     .btn-primary:hover { background: #0d52d4; transform: translateY(-1px); }
-
-    .btn-ghost {
-      display: inline-flex; align-items: center; gap: 8px;
-      background: transparent; color: rgba(255,255,255,0.7);
-      font-family: 'DM Sans', sans-serif;
-      font-size: 15px; font-weight: 400;
-      padding: 14px 24px; border-radius: 100px;
-      border: 1px solid rgba(255,255,255,0.2);
-      text-decoration: none;
-      transition: border-color 0.2s, color 0.2s;
-    }
+    .btn-ghost { display: inline-flex; align-items: center; gap: 8px; background: transparent; color: rgba(255,255,255,0.7); font-family: 'DM Sans', sans-serif; font-size: 15px; font-weight: 400; padding: 14px 24px; border-radius: 100px; border: 1px solid rgba(255,255,255,0.2); text-decoration: none; transition: border-color 0.2s, color 0.2s; }
     .btn-ghost:hover { border-color: rgba(255,255,255,0.5); color: var(--white); }
-
-    .hero-stats {
-      display: flex; gap: 32px; margin-top: 48px;
-      padding-top: 40px;
-      border-top: 1px solid rgba(255,255,255,0.08);
-    }
-
-    .hero-stat strong {
-      display: block;
-      font-family: 'Syne', sans-serif;
-      font-size: 2rem; font-weight: 800;
-      color: var(--white);
-    }
-    .hero-stat span {
-      font-size: 12px; font-weight: 300;
-      color: rgba(255,255,255,0.4);
-      text-transform: uppercase; letter-spacing: 1px;
-    }
-
-    /* hero right — logo display */
-    .hero-visual {
-      display: flex; align-items: center; justify-content: center;
-      position: relative;
-    }
-
-    .hero-logo-ring {
-      width: 320px; height: 320px; border-radius: 50%;
-      background: rgba(26,107,255,0.08);
-      border: 1px solid rgba(26,107,255,0.2);
-      display: flex; align-items: center; justify-content: center;
-      position: relative;
-      animation: spin-slow 20s linear infinite;
-    }
-
-    .hero-logo-ring::before {
-      content: '';
-      position: absolute; inset: 12px;
-      border-radius: 50%;
-      border: 1px solid rgba(26,107,255,0.12);
-    }
-
-    @keyframes spin-slow {
-      from { transform: rotate(0deg); }
-      to { transform: rotate(360deg); }
-    }
-
-    .hero-logo-center {
-      animation: spin-slow 20s linear infinite reverse;
-    }
-
-    /* ── SECTION SHARED ───────────────────────────────────── */
+    .hero-stats { display: flex; gap: 32px; margin-top: 48px; padding-top: 40px; border-top: 1px solid rgba(255,255,255,0.08); }
+    .hero-stat strong { display: block; font-family: 'Syne', sans-serif; font-size: 2rem; font-weight: 800; color: var(--white); }
+    .hero-stat span { font-size: 12px; font-weight: 300; color: rgba(255,255,255,0.4); text-transform: uppercase; letter-spacing: 1px; }
+    .hero-visual { display: flex; align-items: center; justify-content: center; position: relative; cursor: pointer; }
+    .hero-logo-ring { width: 320px; height: 320px; border-radius: 50%; background: rgba(26,107,255,0.08); border: 1px solid rgba(26,107,255,0.2); display: flex; align-items: center; justify-content: center; position: relative; animation: spin-slow 20s linear infinite; }
+    .hero-logo-ring::before { content: ''; position: absolute; inset: 12px; border-radius: 50%; border: 1px solid rgba(26,107,255,0.12); }
+    @keyframes spin-slow { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+    .hero-logo-center { animation: spin-slow 20s linear infinite reverse; }
     section { padding: 100px 48px; }
-
-    .section-inner {
-      max-width: 1100px; margin: 0 auto;
-    }
-
-    .eyebrow {
-      font-size: 11px; font-weight: 600;
-      letter-spacing: 4px; text-transform: uppercase;
-      color: var(--blue); margin-bottom: 14px;
-    }
-
-    .section-title {
-      font-family: 'Syne', sans-serif;
-      font-size: clamp(2rem, 3.5vw, 2.8rem);
-      font-weight: 800; letter-spacing: -1px;
-      color: var(--navy); line-height: 1.15;
-      margin-bottom: 16px;
-    }
-
-    .section-sub {
-      font-size: 1.05rem; font-weight: 300;
-      color: #5a6a8a; line-height: 1.7;
-      max-width: 520px; margin-bottom: 56px;
-    }
-
-    /* ── SERVICES ─────────────────────────────────────────── */
+    .section-inner { max-width: 1100px; margin: 0 auto; }
+    .eyebrow { font-size: 11px; font-weight: 600; letter-spacing: 4px; text-transform: uppercase; color: var(--blue); margin-bottom: 14px; }
+    .section-title { font-family: 'Syne', sans-serif; font-size: clamp(2rem, 3.5vw, 2.8rem); font-weight: 800; letter-spacing: -1px; color: var(--navy); line-height: 1.15; margin-bottom: 16px; }
+    .section-sub { font-size: 1.05rem; font-weight: 300; color: #5a6a8a; line-height: 1.7; max-width: 520px; margin-bottom: 56px; }
     #services { background: var(--off); }
-
-    .services-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 20px;
-    }
-
-    .service-card {
-      background: var(--white);
-      border: 1px solid var(--border);
-      border-radius: 20px;
-      padding: 36px 32px;
-      transition: box-shadow 0.2s, transform 0.2s;
-      position: relative; overflow: hidden;
-    }
-
-    .service-card::before {
-      content: '';
-      position: absolute; top: 0; left: 0; right: 0;
-      height: 3px;
-      background: var(--blue);
-      transform: scaleX(0); transform-origin: left;
-      transition: transform 0.3s;
-    }
-
+    .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
+    .service-card { background: var(--white); border: 1px solid var(--border); border-radius: 20px; padding: 36px 32px; transition: box-shadow 0.2s, transform 0.2s; position: relative; overflow: hidden; }
+    .service-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: var(--blue); transform: scaleX(0); transform-origin: left; transition: transform 0.3s; }
     .service-card:hover::before { transform: scaleX(1); }
-    .service-card:hover {
-      box-shadow: 0 12px 48px rgba(26,107,255,0.1);
-      transform: translateY(-3px);
-    }
-
-    .service-icon {
-      width: 52px; height: 52px;
-      background: var(--blue-pale);
-      border-radius: 14px;
-      display: flex; align-items: center; justify-content: center;
-      margin-bottom: 20px;
-      font-size: 24px;
-    }
-
-    .service-card h3 {
-      font-family: 'Syne', sans-serif;
-      font-size: 1.2rem; font-weight: 700;
-      color: var(--navy); margin-bottom: 10px;
-    }
-
-    .service-card p {
-      font-size: 14px; font-weight: 300;
-      color: #5a6a8a; line-height: 1.65;
-      margin-bottom: 20px;
-    }
-
-    .service-price {
-      font-family: 'Syne', sans-serif;
-      font-size: 1.5rem; font-weight: 800;
-      color: var(--blue);
-    }
-
-    .service-price sub {
-      font-family: 'DM Sans', sans-serif;
-      font-size: 13px; font-weight: 400;
-      color: var(--muted);
-    }
-
-    /* ── HOW IT WORKS ─────────────────────────────────────── */
+    .service-card:hover { box-shadow: 0 12px 48px rgba(26,107,255,0.1); transform: translateY(-3px); }
+    .service-icon { width: 52px; height: 52px; background: var(--blue-pale); border-radius: 14px; display: flex; align-items: center; justify-content: center; margin-bottom: 20px; font-size: 24px; }
+    .service-card h3 { font-family: 'Syne', sans-serif; font-size: 1.2rem; font-weight: 700; color: var(--navy); margin-bottom: 10px; }
+    .service-card p { font-size: 14px; font-weight: 300; color: #5a6a8a; line-height: 1.65; margin-bottom: 20px; }
+    .service-price { font-family: 'Syne', sans-serif; font-size: 1.5rem; font-weight: 800; color: var(--blue); }
+    .service-price sub { font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 400; color: var(--muted); }
     #how { background: var(--white); }
-
-    .steps-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 0;
-      position: relative;
-    }
-
-    .steps-grid::before {
-      content: '';
-      position: absolute;
-      top: 36px; left: 10%; right: 10%; height: 1px;
-      background: linear-gradient(90deg, transparent, var(--border), var(--border), transparent);
-    }
-
-    .step {
-      padding: 0 24px 0 0;
-      position: relative; z-index: 1;
-    }
-
-    .step-num {
-      width: 72px; height: 72px;
-      border-radius: 50%;
-      background: var(--white);
-      border: 2px solid var(--blue);
-      display: flex; align-items: center; justify-content: center;
-      font-family: 'Syne', sans-serif;
-      font-size: 1.4rem; font-weight: 800;
-      color: var(--blue);
-      margin-bottom: 24px;
-    }
-
-    .step h4 {
-      font-family: 'Syne', sans-serif;
-      font-size: 1rem; font-weight: 700;
-      color: var(--navy); margin-bottom: 10px;
-    }
-
-    .step p {
-      font-size: 14px; font-weight: 300;
-      color: #5a6a8a; line-height: 1.6;
-    }
-
-    /* ── EXAMPLES ─────────────────────────────────────────── */
+    .steps-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 0; position: relative; }
+    .steps-grid::before { content: ''; position: absolute; top: 36px; left: 10%; right: 10%; height: 1px; background: linear-gradient(90deg, transparent, var(--border), var(--border), transparent); }
+    .step { padding: 0 24px 0 0; position: relative; z-index: 1; }
+    .step-num { width: 72px; height: 72px; border-radius: 50%; background: var(--white); border: 2px solid var(--blue); display: flex; align-items: center; justify-content: center; font-family: 'Syne', sans-serif; font-size: 1.4rem; font-weight: 800; color: var(--blue); margin-bottom: 24px; }
+    .step h4 { font-family: 'Syne', sans-serif; font-size: 1rem; font-weight: 700; color: var(--navy); margin-bottom: 10px; }
+    .step p { font-size: 14px; font-weight: 300; color: #5a6a8a; line-height: 1.6; }
     #examples { background: var(--dark); }
     #examples .section-title { color: var(--white); }
     #examples .section-sub { color: rgba(255,255,255,0.45); }
     #examples .eyebrow { color: #7ab4ff; }
-
-    .examples-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 20px;
-    }
-
-    .example-card {
-      background: rgba(255,255,255,0.04);
-      border: 1px solid rgba(255,255,255,0.08);
-      border-radius: 20px;
-      overflow: hidden;
-      transition: border-color 0.2s, transform 0.2s;
-    }
-
-    .example-card:hover {
-      border-color: rgba(26,107,255,0.5);
-      transform: translateY(-3px);
-    }
-
-    .example-thumb {
-  width: 100%; aspect-ratio: 16/9;
-  background: linear-gradient(135deg, #0d1f4e 0%, #1a3578 100%);
-  display: flex; align-items: center; justify-content: center;
-  position: relative; overflow: hidden;
-}
-
-    .example-thumb-bg {
-      position: absolute; inset: 0;
-      background-image:
-        linear-gradient(rgba(26,107,255,0.08) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(26,107,255,0.08) 1px, transparent 1px);
-      background-size: 24px 24px;
-    }
-
-    .play-btn {
-      width: 60px; height: 60px; border-radius: 50%;
-      background: var(--blue);
-      display: flex; align-items: center; justify-content: center;
-      position: relative; z-index: 1;
-      transition: transform 0.2s, background 0.2s;
-    }
-
-    .example-card:hover .play-btn {
-      transform: scale(1.1);
-      background: #0d52d4;
-    }
-
-    .play-icon {
-      width: 0; height: 0;
-      border-top: 11px solid transparent;
-      border-bottom: 11px solid transparent;
-      border-left: 18px solid white;
-      margin-left: 4px;
-    }
-
-    .example-body {
-      padding: 24px;
-    }
-
-    .example-tag {
-      display: inline-block;
-      background: rgba(26,107,255,0.15);
-      color: #7ab4ff;
-      font-size: 11px; font-weight: 500;
-      letter-spacing: 1px; text-transform: uppercase;
-      padding: 4px 10px; border-radius: 100px;
-      margin-bottom: 10px;
-    }
-
-    .example-body h3 {
-      font-family: 'Syne', sans-serif;
-      font-size: 1rem; font-weight: 700;
-      color: var(--white); margin-bottom: 8px;
-    }
-
-    .example-body p {
-      font-size: 13px; font-weight: 300;
-      color: rgba(255,255,255,0.45);
-      line-height: 1.55;
-    }
-
-    .example-link {
-      display: inline-flex; align-items: center; gap: 6px;
-      margin-top: 14px;
-      font-size: 13px; font-weight: 500;
-      color: var(--blue-light);
-      text-decoration: none;
-      transition: gap 0.2s;
-    }
-    .example-link:hover { gap: 10px; }
-
-    /* ── PRICING ──────────────────────────────────────────── */
+    .examples-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
+    .example-card { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); border-radius: 20px; overflow: hidden; transition: border-color 0.2s, transform 0.2s; }
+    .example-card:hover { border-color: rgba(26,107,255,0.5); transform: translateY(-3px); }
+    .example-thumb { width: 100%; aspect-ratio: 16/9; background: linear-gradient(135deg, #0d1f4e 0%, #1a3578 100%); display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; }
+    .example-body { padding: 24px; }
+    .example-tag { display: inline-block; background: rgba(26,107,255,0.15); color: #7ab4ff; font-size: 11px; font-weight: 500; letter-spacing: 1px; text-transform: uppercase; padding: 4px 10px; border-radius: 100px; margin-bottom: 10px; }
+    .example-body h3 { font-family: 'Syne', sans-serif; font-size: 1rem; font-weight: 700; color: var(--white); margin-bottom: 8px; }
+    .example-body p { font-size: 13px; font-weight: 300; color: rgba(255,255,255,0.45); line-height: 1.55; }
     #pricing { background: var(--off); }
-
-    .pricing-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 20px;
-    }
-
-    .pricing-card {
-      background: var(--white);
-      border: 1px solid var(--border);
-      border-radius: 20px;
-      padding: 36px 32px;
-      position: relative;
-    }
-
-    .pricing-card.featured {
-      border: 2px solid var(--blue);
-      background: var(--navy);
-    }
-
-    .popular-badge {
-      position: absolute; top: -13px; left: 50%; transform: translateX(-50%);
-      background: var(--blue); color: var(--white);
-      font-size: 11px; font-weight: 600;
-      letter-spacing: 2px; text-transform: uppercase;
-      padding: 5px 16px; border-radius: 100px;
-      white-space: nowrap;
-    }
-
-    .plan-name {
-      font-family: 'Syne', sans-serif;
-      font-size: 1rem; font-weight: 700;
-      color: var(--navy); margin-bottom: 4px;
-    }
+    .pricing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+    .pricing-card { background: var(--white); border: 1px solid var(--border); border-radius: 20px; padding: 36px 32px; position: relative; }
+    .pricing-card.featured { border: 2px solid var(--blue); background: var(--navy); }
+    .popular-badge { position: absolute; top: -13px; left: 50%; transform: translateX(-50%); background: var(--blue); color: var(--white); font-size: 11px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; padding: 5px 16px; border-radius: 100px; white-space: nowrap; }
+    .plan-name { font-family: 'Syne', sans-serif; font-size: 1rem; font-weight: 700; color: var(--navy); margin-bottom: 4px; }
     .pricing-card.featured .plan-name { color: var(--white); }
-
-    .plan-desc {
-      font-size: 13px; font-weight: 300;
-      color: #5a6a8a; margin-bottom: 20px;
-    }
+    .plan-desc { font-size: 13px; font-weight: 300; color: #5a6a8a; margin-bottom: 20px; }
     .pricing-card.featured .plan-desc { color: rgba(255,255,255,0.5); }
-
-    .plan-price {
-      font-family: 'Syne', sans-serif;
-      font-size: 3rem; font-weight: 800;
-      color: var(--navy); line-height: 1;
-      margin-bottom: 4px;
-    }
+    .plan-price { font-family: 'Syne', sans-serif; font-size: 3rem; font-weight: 800; color: var(--navy); line-height: 1; margin-bottom: 4px; }
     .pricing-card.featured .plan-price { color: var(--white); }
-
     .plan-price sup { font-size: 1.5rem; vertical-align: top; margin-top: 8px; }
-    .plan-period {
-      font-family: 'DM Sans', sans-serif;
-      font-size: 13px; font-weight: 300;
-      color: var(--muted); margin-bottom: 28px;
-    }
-
-    .plan-features {
-      list-style: none; margin-bottom: 28px;
-    }
-    .plan-features li {
-      font-size: 14px; font-weight: 300;
-      color: #5a6a8a; padding: 9px 0;
-      border-bottom: 1px solid var(--border);
-      display: flex; align-items: center; gap: 10px;
-    }
-    .pricing-card.featured .plan-features li {
-      color: rgba(255,255,255,0.7);
-      border-color: rgba(255,255,255,0.08);
-    }
+    .plan-period { font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 300; color: var(--muted); margin-bottom: 28px; }
+    .plan-features { list-style: none; margin-bottom: 28px; }
+    .plan-features li { font-size: 14px; font-weight: 300; color: #5a6a8a; padding: 9px 0; border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 10px; }
+    .pricing-card.featured .plan-features li { color: rgba(255,255,255,0.7); border-color: rgba(255,255,255,0.08); }
     .check { color: var(--blue); font-size: 16px; font-weight: 700; flex-shrink: 0; }
     .pricing-card.featured .check { color: var(--gold); }
-
-    .plan-btn {
-      display: block; width: 100%;
-      text-align: center;
-      padding: 13px; border-radius: 100px;
-      font-family: 'DM Sans', sans-serif;
-      font-size: 15px; font-weight: 500;
-      text-decoration: none;
-      transition: background 0.2s, color 0.2s;
-      border: 1.5px solid var(--border);
-      color: var(--navy);
-      background: transparent;
-    }
+    .plan-btn { display: block; width: 100%; text-align: center; padding: 13px; border-radius: 100px; font-family: 'DM Sans', sans-serif; font-size: 15px; font-weight: 500; text-decoration: none; transition: background 0.2s, color 0.2s; border: 1.5px solid var(--border); color: var(--navy); background: transparent; }
     .plan-btn:hover { border-color: var(--blue); color: var(--blue); }
-
-    .plan-btn.primary {
-      background: var(--blue); color: var(--white); border-color: var(--blue);
-    }
+    .plan-btn.primary { background: var(--blue); color: var(--white); border-color: var(--blue); }
     .plan-btn.primary:hover { background: #0d52d4; border-color: #0d52d4; }
-
-    /* ── WHY STRINGCO ─────────────────────────────────────── */
     #why { background: var(--white); }
-
-    .why-grid {
-      display: grid; grid-template-columns: 1fr 1fr;
-      gap: 80px; align-items: center;
-    }
-
-    .why-list {
-      list-style: none; display: flex; flex-direction: column; gap: 24px;
-    }
-
-    .why-item {
-      display: flex; gap: 18px; align-items: flex-start;
-    }
-
-    .why-dot {
-      width: 44px; height: 44px; flex-shrink: 0;
-      background: var(--blue-pale); border-radius: 12px;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 20px;
-    }
-
-    .why-item h4 {
-      font-family: 'Syne', sans-serif;
-      font-size: 1rem; font-weight: 700;
-      color: var(--navy); margin-bottom: 4px;
-    }
-
-    .why-item p {
-      font-size: 14px; font-weight: 300;
-      color: #5a6a8a; line-height: 1.6;
-    }
-
-    .why-visual {
-      background: var(--dark);
-      border-radius: 24px; padding: 48px;
-      display: flex; flex-direction: column; gap: 20px;
-    }
-
-    .why-stat {
-      background: rgba(255,255,255,0.05);
-      border: 1px solid rgba(255,255,255,0.08);
-      border-radius: 14px; padding: 20px 24px;
-    }
-
-    .why-stat-num {
-      font-family: 'Syne', sans-serif;
-      font-size: 2rem; font-weight: 800;
-      color: var(--blue-light);
-    }
-
-    .why-stat-label {
-      font-size: 13px; font-weight: 300;
-      color: rgba(255,255,255,0.45);
-      margin-top: 2px;
-    }
-
-    /* ── CONTACT ──────────────────────────────────────────── */
+    .why-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+    .why-list { list-style: none; display: flex; flex-direction: column; gap: 24px; }
+    .why-item { display: flex; gap: 18px; align-items: flex-start; }
+    .why-dot { width: 44px; height: 44px; flex-shrink: 0; background: var(--blue-pale); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 20px; }
+    .why-item h4 { font-family: 'Syne', sans-serif; font-size: 1rem; font-weight: 700; color: var(--navy); margin-bottom: 4px; }
+    .why-item p { font-size: 14px; font-weight: 300; color: #5a6a8a; line-height: 1.6; }
+    .why-visual { background: var(--dark); border-radius: 24px; padding: 48px; display: flex; flex-direction: column; gap: 20px; }
+    .why-stat { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.08); border-radius: 14px; padding: 20px 24px; }
+    .why-stat-num { font-family: 'Syne', sans-serif; font-size: 2rem; font-weight: 800; color: var(--blue-light); }
+    .why-stat-label { font-size: 13px; font-weight: 300; color: rgba(255,255,255,0.45); margin-top: 2px; }
     #contact { background: var(--navy); }
     #contact .eyebrow { color: #7ab4ff; }
     #contact .section-title { color: var(--white); }
     #contact .section-sub { color: rgba(255,255,255,0.45); max-width: 100%; }
-
-    .contact-grid {
-      display: grid; grid-template-columns: 1fr 1fr;
-      gap: 60px; align-items: start;
-    }
-
-    .contact-card {
-      background: rgba(255,255,255,0.05);
-      border: 1px solid rgba(255,255,255,0.1);
-      border-radius: 20px; padding: 36px;
-    }
-
-    .contact-card h3 {
-      font-family: 'Syne', sans-serif;
-      font-size: 1.1rem; font-weight: 700;
-      color: var(--white); margin-bottom: 24px;
-    }
-
-    .contact-item {
-      display: flex; align-items: flex-start; gap: 14px;
-      margin-bottom: 20px;
-    }
-
+    .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: start; }
+    .contact-card { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 20px; padding: 36px; }
+    .contact-card h3 { font-family: 'Syne', sans-serif; font-size: 1.1rem; font-weight: 700; color: var(--white); margin-bottom: 24px; }
+    .contact-item { display: flex; align-items: flex-start; gap: 14px; margin-bottom: 20px; }
     .contact-item:last-child { margin-bottom: 0; }
-
-    .contact-icon {
-      width: 40px; height: 40px; flex-shrink: 0;
-      background: rgba(26,107,255,0.2);
-      border-radius: 10px;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 18px;
-    }
-
-    .contact-label {
-      font-size: 11px; font-weight: 500;
-      letter-spacing: 2px; text-transform: uppercase;
-      color: rgba(255,255,255,0.35);
-      margin-bottom: 3px;
-    }
-
-    .contact-value {
-      font-size: 15px; font-weight: 400;
-      color: var(--white);
-    }
-
-    .contact-value a {
-      color: var(--white); text-decoration: none;
-      transition: color 0.2s;
-    }
+    .contact-icon { width: 40px; height: 40px; flex-shrink: 0; background: rgba(26,107,255,0.2); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 18px; }
+    .contact-label { font-size: 11px; font-weight: 500; letter-spacing: 2px; text-transform: uppercase; color: rgba(255,255,255,0.35); margin-bottom: 3px; }
+    .contact-value { font-size: 15px; font-weight: 400; color: var(--white); }
+    .contact-value a { color: var(--white); text-decoration: none; transition: color 0.2s; }
     .contact-value a:hover { color: var(--blue-light); }
-
-    .contact-form-section { }
-
-    .contact-form-section h3 {
-      font-family: 'Syne', sans-serif;
-      font-size: 1.1rem; font-weight: 700;
-      color: var(--white); margin-bottom: 24px;
-    }
-
-    .form-row {
-      display: grid; grid-template-columns: 1fr 1fr; gap: 14px;
-      margin-bottom: 14px;
-    }
-
-    .form-field {
-      margin-bottom: 14px;
-    }
-
-    .form-field label {
-      display: block;
-      font-size: 12px; font-weight: 500;
-      letter-spacing: 1px; text-transform: uppercase;
-      color: rgba(255,255,255,0.4);
-      margin-bottom: 8px;
-    }
-
-    .form-field input,
-    .form-field select,
-    .form-field textarea {
-      width: 100%; padding: 13px 16px;
-      background: rgba(255,255,255,0.06);
-      border: 1px solid rgba(255,255,255,0.12);
-      border-radius: 10px;
-      font-family: 'DM Sans', sans-serif;
-      font-size: 14px; color: var(--white);
-      transition: border-color 0.2s;
-      outline: none;
-    }
-
-    .form-field input::placeholder,
-    .form-field textarea::placeholder { color: rgba(255,255,255,0.2); }
-    .form-field input:focus,
-    .form-field select:focus,
-    .form-field textarea:focus { border-color: var(--blue); }
-
+    .contact-form-section h3 { font-family: 'Syne', sans-serif; font-size: 1.1rem; font-weight: 700; color: var(--white); margin-bottom: 24px; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 14px; }
+    .form-field { margin-bottom: 14px; }
+    .form-field label { display: block; font-size: 12px; font-weight: 500; letter-spacing: 1px; text-transform: uppercase; color: rgba(255,255,255,0.4); margin-bottom: 8px; }
+    .form-field input, .form-field select, .form-field textarea { width: 100%; padding: 13px 16px; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12); border-radius: 10px; font-family: 'DM Sans', sans-serif; font-size: 14px; color: var(--white); transition: border-color 0.2s; outline: none; }
+    .form-field input::placeholder, .form-field textarea::placeholder { color: rgba(255,255,255,0.2); }
+    .form-field input:focus, .form-field select:focus, .form-field textarea:focus { border-color: var(--blue); }
     .form-field select option { background: var(--navy); color: var(--white); }
-
     .form-field textarea { resize: vertical; min-height: 110px; }
-
-    .form-submit {
-      width: 100%; padding: 14px;
-      background: var(--blue); color: var(--white);
-      border: none; border-radius: 100px;
-      font-family: 'DM Sans', sans-serif;
-      font-size: 15px; font-weight: 500;
-      cursor: pointer;
-      transition: background 0.2s, transform 0.15s;
-    }
+    .form-submit { width: 100%; padding: 14px; background: var(--blue); color: var(--white); border: none; border-radius: 100px; font-family: 'DM Sans', sans-serif; font-size: 15px; font-weight: 500; cursor: pointer; transition: background 0.2s, transform 0.15s; }
     .form-submit:hover { background: #0d52d4; transform: translateY(-1px); }
-
-    /* ── FOOTER ───────────────────────────────────────────── */
-    footer {
-      background: var(--dark);
-      padding: 48px;
-      display: flex; align-items: center; justify-content: space-between;
-      flex-wrap: wrap; gap: 20px;
-      border-top: 1px solid rgba(255,255,255,0.06);
-    }
-
-    .footer-logo {
-      font-family: 'Syne', sans-serif;
-      font-size: 18px; font-weight: 800;
-      color: var(--white); letter-spacing: -0.3px;
-    }
+    footer { background: var(--dark); padding: 48px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 20px; border-top: 1px solid rgba(255,255,255,0.06); }
+    .footer-logo { font-family: 'Syne', sans-serif; font-size: 18px; font-weight: 800; color: var(--white); letter-spacing: -0.3px; }
     .footer-logo span { color: var(--blue); }
-
-    .footer-links {
-      display: flex; gap: 28px; list-style: none;
-    }
-    .footer-links a {
-      font-size: 13px; color: rgba(255,255,255,0.35);
-      text-decoration: none; transition: color 0.2s;
-    }
+    .footer-links { display: flex; gap: 28px; list-style: none; }
+    .footer-links a { font-size: 13px; color: rgba(255,255,255,0.35); text-decoration: none; transition: color 0.2s; }
     .footer-links a:hover { color: var(--white); }
-
-    .footer-copy {
-      font-size: 12px; color: rgba(255,255,255,0.25);
-    }
-
-    /* ── RESPONSIVE ───────────────────────────────────────── */
+    .footer-copy { font-size: 12px; color: rgba(255,255,255,0.25); }
     @media (max-width: 768px) {
       nav { padding: 0 20px; }
       .nav-links { display: none; }
@@ -829,7 +213,7 @@
       </div>
     </div>
     <div class="hero-visual">
-      <a href="#" onclick="openVideo(event)">
+      <a href="#" onclick="openVideo(event)" style="display:block;">
         <div class="hero-logo-ring">
           <div class="hero-logo-center">
             <svg width="160" height="160" viewBox="0 0 110 110">
@@ -848,468 +232,4 @@
 </section>
 
 <!-- Video Popup -->
-<div id="videoModal" onclick="closeVideo()" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.85); z-index:999; align-items:center; justify-content:center;">
-  <div onclick="event.stopPropagation()" style="width:90%; max-width:860px; aspect-ratio:16/9; position:relative;">
-    <iframe id="videoFrame" width="100%" height="100%" src="" frameborder="0" allowfullscreen style="border-radius:12px;"></iframe>
-    <button onclick="closeVideo()" style="position:absolute; top:-40px; right:0; background:none; border:none; color:white; font-size:28px; cursor:pointer;">✕</button>
-  </div>
-</div>
-  
-<!-- SERVICES -->
-<section id="services">
-  <div class="section-inner">
-    <p class="eyebrow">What we do</p>
-    <h2 class="section-title">Video ad services built<br/>for small business.</h2>
-    <p class="section-sub">From a 60-second social clip to a full brand video package — we produce professional AI-generated video ads tailored to your business.</p>
-    <div class="services-grid">
-      <div class="service-card">
-        <div class="service-icon" aria-hidden="true">🎬</div>
-        <h3>Startup Spotlight</h3>
-        <p>A punchy 60-second video introducing your LLC or S-corp to the world. AI script, voiceover, visuals, and music — ready to publish on YouTube or your website.</p>
-        <div class="service-price">$149 <sub>/ video</sub></div>
-      </div>
-      <div class="service-card">
-        <div class="service-icon" aria-hidden="true">📣</div>
-        <h3>Growth Ad</h3>
-        <p>A 2-minute brand video with your logo, custom colors, and professional AI voiceover. Includes a YouTube upload and two rounds of revisions.</p>
-        <div class="service-price">$299 <sub>/ video</sub></div>
-      </div>
-      <div class="service-card">
-        <div class="service-icon" aria-hidden="true">🏆</div>
-        <h3>Brand Bundle</h3>
-        <p>Three custom videos — intro, promo, and testimonial-style — with a consistent visual identity. Perfect for agencies, product launches, or full brand rollouts.</p>
-        <div class="service-price">$599 <sub>/ 3 videos</sub></div>
-      </div>
-      <div class="service-card">
-        <div class="service-icon" aria-hidden="true">🤝</div>
-        <h3>Nonprofit Special</h3>
-        <p>Mission-driven video production for 501(c)(3) organizations. Showcase your cause, connect with donors, and grow your community with compelling storytelling.</p>
-        <div class="service-price">Contact us <sub>for pricing</sub></div>
-      </div>
-      <div class="service-card">
-        <div class="service-icon" aria-hidden="true">⚡</div>
-        <h3>Social Media Shorts</h3>
-        <p>Vertical-format 15–30 second clips optimized for Instagram Reels, TikTok, and YouTube Shorts. High-impact, scroll-stopping content in your brand voice.</p>
-        <div class="service-price">$99 <sub>/ clip</sub></div>
-      </div>
-      <div class="service-card">
-        <div class="service-icon" aria-hidden="true">🎯</div>
-        <h3>Ad Campaign Package</h3>
-        <p>A complete video ad campaign — multiple lengths and formats for different placements, unified creative direction, and strategic messaging for your target audience.</p>
-        <div class="service-price">Custom <sub>pricing</sub></div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- HOW IT WORKS -->
-<section id="how">
-  <div class="section-inner">
-    <p class="eyebrow">The process</p>
-    <h2 class="section-title">From idea to published<br/>video in four steps.</h2>
-    <p class="section-sub">No video crew. No back-and-forth with an agency. Just you, your business info, and our AI production team.</p>
-    <div class="steps-grid">
-      <div class="step">
-        <div class="step-num">01</div>
-        <h4>Tell us about your business</h4>
-        <p>Fill out our short intake form — your name, what you do, who you serve, and the tone you want. Takes 5 minutes.</p>
-      </div>
-      <div class="step">
-        <div class="step-num">02</div>
-        <h4>We craft your video</h4>
-        <p>Our AI generates a custom script, selects licensed visuals and music, records a professional voiceover, and assembles your ad.</p>
-      </div>
-      <div class="step">
-        <div class="step-num">03</div>
-        <h4>You review and approve</h4>
-        <p>Watch your draft within 48 hours. Request any tweaks — revisions are included in every plan.</p>
-      </div>
-      <div class="step">
-        <div class="step-num">04</div>
-        <h4>Publish and grow</h4>
-        <p>Download your finished video or let us upload it directly to your YouTube channel. Start reaching customers immediately.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- EXAMPLES -->
-<section id="examples">
-  <div class="section-inner">
-    <p class="eyebrow">Our work</p>
-    <h2 class="section-title">See what's possible.</h2>
-    <p class="section-sub">Real AI-generated video ads created for small businesses, nonprofits, and startups just like yours.</p>
-    <div class="examples-grid">
-  <div class="example-card">
-    <div class="example-thumb">
-      <iframe width="100%" height="100%" src="https://www.youtube.com/embed/TkCd9v9S3Qw?rel=0&modestbranding=1" frameborder="0" allowfullscreen style="position:absolute;top:0;left:0;width:100%;height:100%;"></iframe>
-    </div>
-    <div class="example-body">
-      <span class="example-tag">Nonprofit</span>
-      <h3>Wee Count — Mobile Preschool</h3>
-      <p>A compelling community story video for a 501(c)(3) nonprofit bringing preschool education to underserved neighborhoods via a converted bus.</p>
-    </div>
-  </div>
-  <div class="example-card">
-    <div class="example-thumb">
-      <iframe width="100%" height="100%" src="https://www.youtube.com/embed/eMvSe_9BwU8?rel=0&modestbranding=1" frameborder="0" allowfullscreen style="position:absolute;top:0;left:0;width:100%;height:100%;"></iframe>
-    </div>
-    <div class="example-body">
-      <span class="example-tag">Service Business</span>
-      <h3>Local Service Business Ad</h3>
-      <p>A 60-second promotional video showcasing a small service-based LLC — brand story, key offerings, and a clear call to action.</p>
-    </div>
-  </div>
-  <div class="example-card">
-    <div class="example-thumb">
-      <iframe width="100%" height="100%" src="https://www.youtube.com/embed/-eH7xJosr7A?rel=0&modestbranding=1" frameborder="0" allowfullscreen style="position:absolute;top:0;left:0;width:100%;height:100%;"></iframe>
-    </div>
-    <div class="example-body">
-      <span class="example-tag">S-Corp Launch</span>
-      <h3>Startup Brand Video</h3>
-      <p>A 2-minute brand video introducing a newly incorporated S-corp to their target market, with logo integration and custom voiceover.</p>
-    </div>
-  </div>
-</div>
-        </a>
-        <div class="example-body">
-          <span class="example-tag">Nonprofit</span>
-          <h3>Wee Count — Mobile Preschool</h3>
-          <p>A compelling community story video for a 501(c)(3) nonprofit bringing preschool education to underserved neighborhoods via a converted bus.</p>
-          <a href="https://youtu.be/TkCd9v9S3Qw" target="_blank" rel="noopener" class="example-link">Watch on YouTube →</a>
-        </div>
-      </div>
-      <div class="example-card">
-        <a href="https://youtu.be/eMvSe_9BwU8" target="_blank" rel="noopener" aria-label="Watch Service Business example video">
-          <div class="example-thumb">
-            <div class="example-thumb-bg" aria-hidden="true"></div>
-            <div class="play-btn"><div class="play-icon"></div></div>
-          </div>
-        </a>
-        <div class="example-body">
-          <span class="example-tag">Service Business</span>
-          <h3>Local Service Business Ad</h3>
-          <p>A 60-second promotional video showcasing a small service-based LLC — brand story, key offerings, and a clear call to action.</p>
-          <a href="https://youtu.be/eMvSe_9BwU8" target="_blank" rel="noopener" class="example-link">Watch on YouTube →</a>
-        </div>
-      </div>
-      <div class="example-card">
-        <a href="https://youtu.be/-eH7xJosr7A" target="_blank" rel="noopener" aria-label="Watch S-Corp Launch example video">
-          <div class="example-thumb">
-            <div class="example-thumb-bg" aria-hidden="true"></div>
-            <div class="play-btn"><div class="play-icon"></div></div>
-          </div>
-        </a>
-        <div class="example-body">
-          <span class="example-tag">S-Corp Launch</span>
-          <h3>Startup Brand Video</h3>
-          <p>A 2-minute brand video introducing a newly incorporated S-corp to their target market, with logo integration and custom voiceover.</p>
-          <a href="https://youtu.be/-eH7xJosr7A" target="_blank" rel="noopener" class="example-link">Watch on YouTube →</a>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- PRICING -->
-<section id="pricing">
-  <div class="section-inner">
-    <p class="eyebrow">Pricing</p>
-    <h2 class="section-title">Transparent pricing for<br/>every budget.</h2>
-    <p class="section-sub">No hidden fees. No subscription required. Pay per video and own it outright.</p>
-    <div class="pricing-grid">
-      <div class="pricing-card">
-        <p class="plan-name">Starter</p>
-        <p class="plan-desc">For new LLCs getting their first video online.</p>
-        <p class="plan-price"><sup>$</sup>149</p>
-        <p class="plan-period">per video</p>
-        <ul class="plan-features">
-          <li><span class="check">✓</span> Up to 60-second video</li>
-          <li><span class="check">✓</span> AI script &amp; voiceover</li>
-          <li><span class="check">✓</span> Licensed visuals &amp; music</li>
-          <li><span class="check">✓</span> 1 revision round</li>
-          <li><span class="check">✓</span> 48-hour delivery</li>
-          <li><span class="check">✓</span> Full commercial rights</li>
-        </ul>
-        <a href="#contact" class="plan-btn">Get started</a>
-      </div>
-      <div class="pricing-card featured">
-        <div class="popular-badge">Most Popular</div>
-        <p class="plan-name">Growth</p>
-        <p class="plan-desc">For S-corps &amp; LLCs ready to make an impression.</p>
-        <p class="plan-price"><sup>$</sup>299</p>
-        <p class="plan-period">per video</p>
-        <ul class="plan-features">
-          <li><span class="check">✓</span> Up to 2-minute video</li>
-          <li><span class="check">✓</span> Custom logo &amp; brand colors</li>
-          <li><span class="check">✓</span> Professional AI voiceover</li>
-          <li><span class="check">✓</span> 2 revision rounds</li>
-          <li><span class="check">✓</span> YouTube upload included</li>
-          <li><span class="check">✓</span> 48-hour priority delivery</li>
-        </ul>
-        <a href="#contact" class="plan-btn primary">Get started</a>
-      </div>
-      <div class="pricing-card">
-        <p class="plan-name">Brand Bundle</p>
-        <p class="plan-desc">For businesses ready to own their category.</p>
-        <p class="plan-price"><sup>$</sup>599</p>
-        <p class="plan-period">3 videos</p>
-        <ul class="plan-features">
-          <li><span class="check">✓</span> 3 fully custom videos</li>
-          <li><span class="check">✓</span> Cohesive brand identity</li>
-          <li><span class="check">✓</span> Unlimited revisions</li>
-          <li><span class="check">✓</span> 24-hour priority delivery</li>
-          <li><span class="check">✓</span> Dedicated account manager</li>
-          <li><span class="check">✓</span> Strategy consultation</li>
-        </ul>
-        <a href="#contact" class="plan-btn">Get started</a>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- WHY STRINGCO -->
-<section id="why">
-  <div class="section-inner">
-    <div class="why-grid">
-      <div>
-        <p class="eyebrow">Why StringCo AI</p>
-        <h2 class="section-title">The smart choice for small business video.</h2>
-        <p class="section-sub">We built StringCo AI specifically for LLCs, S-corps, and nonprofits who need professional video without the agency price tag.</p>
-        <ul class="why-list">
-          <li class="why-item">
-            <div class="why-dot" aria-hidden="true">🚀</div>
-            <div>
-              <h4>Built for small business</h4>
-              <p>Every template, every script prompt, every workflow is designed for startups and small businesses — not Fortune 500 companies.</p>
-            </div>
-          </li>
-          <li class="why-item">
-            <div class="why-dot" aria-hidden="true">🤖</div>
-            <div>
-              <h4>AI that actually works</h4>
-              <p>Our AI understands your industry, your customers, and the message that converts. No generic scripts — everything is custom to your brand.</p>
-            </div>
-          </li>
-          <li class="why-item">
-            <div class="why-dot" aria-hidden="true">⏱️</div>
-            <div>
-              <h4>Fast, transparent delivery</h4>
-              <p>48-hour turnaround on most projects. You always know where your video stands — no agency black boxes or missed deadlines.</p>
-            </div>
-          </li>
-          <li class="why-item">
-            <div class="why-dot" aria-hidden="true">💼</div>
-            <div>
-              <h4>Expert human oversight</h4>
-              <p>Led by Principal Consultant Gwendolyn Stringer, every video is reviewed by an experienced professional before delivery.</p>
-            </div>
-          </li>
-        </ul>
-      </div>
-      <div class="why-visual">
-        <div class="why-stat">
-          <div class="why-stat-num">85%</div>
-          <div class="why-stat-label">of consumers want more video from brands they follow</div>
-        </div>
-        <div class="why-stat">
-          <div class="why-stat-num">4.8×</div>
-          <div class="why-stat-label">more likely to be shared vs. other content types</div>
-        </div>
-        <div class="why-stat">
-          <div class="why-stat-num">80%</div>
-          <div class="why-stat-label">of users recall a video ad they watched in the last 30 days</div>
-        </div>
-        <div class="why-stat">
-          <div class="why-stat-num">48hr</div>
-          <div class="why-stat-label">from brief to publish-ready video — guaranteed</div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- CONTACT -->
-<section id="contact">
-  <div class="section-inner">
-    <p class="eyebrow">Get in touch</p>
-    <h2 class="section-title">Let's make your video.</h2>
-    <p class="section-sub" style="margin-bottom:48px;">Ready to put your business on screen? Fill out the form and we'll be in touch within one business day — or reach us directly below.</p>
-    <div class="contact-grid">
-      <div>
-        <div class="contact-card" style="margin-bottom:20px;">
-          <h3>StringCo AI</h3>
-          <div class="contact-item">
-            <div class="contact-icon" aria-hidden="true">🌐</div>
-            <div>
-              <div class="contact-label">Website</div>
-              <div class="contact-value"><a href="https://www.StringCoAI.com" target="_blank" rel="noopener">StringCoAI.com</a></div>
-            </div>
-          </div>
-          <div class="contact-item">
-            <div class="contact-icon" aria-hidden="true">📞</div>
-            <div>
-              <div class="contact-label">Main Line</div>
-              <div class="contact-value"><a href="tel:+14152515184">(415) 251-5184</a></div>
-            </div>
-          </div>
-        </div>
-        <div class="contact-card">
-          <h3>Gwendolyn Stringer</h3>
-          <div class="contact-item">
-            <div class="contact-icon" aria-hidden="true">👤</div>
-            <div>
-              <div class="contact-label">Title</div>
-              <div class="contact-value">Principal Consultant</div>
-            </div>
-          </div>
-          <div class="contact-item">
-            <div class="contact-icon" aria-hidden="true">📧</div>
-            <div>
-              <div class="contact-label">Email</div>
-              <div class="contact-value"><a href="mailto:gwenstring@gmail.com">gwenstring@gmail.com</a></div>
-            </div>
-          </div>
-          <div class="contact-item">
-            <div class="contact-icon" aria-hidden="true">📱</div>
-            <div>
-              <div class="contact-label">Direct Line</div>
-              <div class="contact-value"><a href="tel:+15109658743">(510) 965-8743</a></div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="contact-form-section">
-        <h3>Send us a message</h3>
-        <form action="https://formspree.io/f/xqejqdvz" method="POST" onsubmit="handleSubmit(event)">
-          <div class="form-row">
-            <div class="form-field">
-              <label for="fname">First name</label>
-              <input type="text" id="fname" name="first_name" placeholder="Jane" required/>
-            </div>
-            <div class="form-field">
-              <label for="lname">Last name</label>
-              <input type="text" id="lname" name="last_name" placeholder="Smith"/>
-            </div>
-          </div>
-          <div class="form-field">
-            <label for="email">Email address</label>
-            <input type="email" id="email" name="email" placeholder="jane@yourbusiness.com" required/>
-          </div>
-          <div class="form-field">
-            <label for="biz">Business name</label>
-            <input type="text" id="biz" name="business_name" placeholder="Your LLC or S-corp name"/>
-          </div>
-          <div class="form-field">
-            <label for="service">Service interested in</label>
-            <select id="service" name="service">
-              <option value="">Select a service…</option>
-              <option>Startup Spotlight — $149</option>
-              <option>Growth Ad — $299</option>
-              <option>Brand Bundle — $599</option>
-              <option>Social Media Shorts — $99</option>
-              <option>Nonprofit Special</option>
-              <option>Ad Campaign Package</option>
-              <option>Not sure yet</option>
-            </select>
-          </div>
-          <div class="form-field">
-            <label for="message">Tell us about your business</label>
-            <textarea id="message" name="message" placeholder="What does your business do, who are your customers, and what do you want your video to achieve?"></textarea>
-          </div>
-          <button type="submit" class="form-submit" id="submitBtn">Send message →</button>
-        </form>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- FOOTER -->
-<footer>
-  <div class="footer-logo">String<span>Co</span> AI</div>
-  <ul class="footer-links">
-    <li><a href="#services">Services</a></li>
-    <li><a href="#examples">Examples</a></li>
-    <li><a href="#pricing">Pricing</a></li>
-    <li><a href="#contact">Contact</a></li>
-  </ul>
-  <div class="footer-copy">© 2024 StringCo AI. All rights reserved.</div>
-</footer>
-
-<script>
-  function openVideo(e) {
-  e.preventDefault();
-  const modal = document.getElementById('videoModal');
-  document.getElementById('videoFrame').src = 'https://www.youtube.com/embed/47iWxW2DlOk?rel=0&modestbranding=1&autoplay=1';
-  modal.style.display = 'flex';
-}
-
-function closeVideo() {
-  const modal = document.getElementById('videoModal');
-  modal.style.display = 'none';
-  document.getElementById('videoFrame').src = '';
-}
-  
-  // smooth active nav
-  const sections = document.querySelectorAll('section[id]');
-  const navLinks = document.querySelectorAll('.nav-links a');
-
-  window.addEventListener('scroll', () => {
-    let current = '';
-    sections.forEach(s => {
-      if (window.scrollY >= s.offsetTop - 100) current = s.id;
-    });
-    navLinks.forEach(a => {
-      a.style.color = a.getAttribute('href') === '#' + current ? '#1a6bff' : '';
-    });
-  });
-
-  // form submit handler with Formspree
-  async function handleSubmit(e) {
-    e.preventDefault();
-    const btn = document.getElementById('submitBtn');
-    const form = e.target;
-    btn.textContent = 'Sending…';
-    btn.disabled = true;
-    try {
-      const response = await fetch('https://formspree.io/f/xqejqdvz', {
-        method: 'POST',
-        body: new FormData(form),
-        headers: { 'Accept': 'application/json' }
-      });
-      if (response.ok) {
-        btn.textContent = '✓ Message sent! We\'ll be in touch soon.';
-        btn.style.background = '#1a9e4a';
-        form.reset();
-      } else {
-        btn.textContent = 'Something went wrong — please email us directly.';
-        btn.style.background = '#c0392b';
-        btn.disabled = false;
-      }
-    } catch (err) {
-      btn.textContent = 'Something went wrong — please email us directly.';
-      btn.style.background = '#c0392b';
-      btn.disabled = false;
-    }
-  }
-
-  // staggered fade-in on scroll
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.style.opacity = '1';
-        entry.target.style.transform = 'translateY(0)';
-      }
-    });
-  }, { threshold: 0.1 });
-
-  document.querySelectorAll('.service-card, .step, .example-card, .pricing-card, .why-item, .why-stat, .contact-card').forEach(el => {
-    el.style.opacity = '0';
-    el.style.transform = 'translateY(20px)';
-    el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
-    observer.observe(el);
-  });
-</script>
-
-</body>
-</html>
+<div id="videoModal" onclick="closeVideo(
