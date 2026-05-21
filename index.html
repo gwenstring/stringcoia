@@ -584,11 +584,21 @@
 </footer>
 
 <script>
-  function openVideo(e) {
+ function openVideo(e) {
     e.preventDefault();
     const modal = document.getElementById('videoModal');
-    document.getElementById('videoFrame').src = 'https://www.youtube.com/embed/47iWxW2DlOk?rel=0&modestbranding=1&autoplay=1';
+    document.getElementById('videoFrame').src = 'https://www.youtube.com/embed/47iWxW2DlOk?rel=0&modestbranding=1&autoplay=1&enablejsapi=1';
     modal.style.display = 'flex';
+    window.addEventListener('message', function onMsg(event) {
+      if (event.origin !== 'https://www.youtube.com') return;
+      try {
+        const data = JSON.parse(event.data);
+        if (data.event === 'onStateChange' && data.info === 0) {
+          closeVideo();
+          window.removeEventListener('message', onMsg);
+        }
+      } catch(e) {}
+    });
   }
 
   function closeVideo() {
