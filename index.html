@@ -844,6 +844,14 @@
 </div>
 </section>
 
+<!-- Video Popup -->
+<div id="videoModal" onclick="closeVideo()" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.85); z-index:999; align-items:center; justify-content:center;">
+  <div onclick="event.stopPropagation()" style="width:90%; max-width:860px; aspect-ratio:16/9; position:relative;">
+    <iframe id="videoFrame" width="100%" height="100%" src="" frameborder="0" allowfullscreen style="border-radius:12px;"></iframe>
+    <button onclick="closeVideo()" style="position:absolute; top:-40px; right:0; background:none; border:none; color:white; font-size:28px; cursor:pointer;">✕</button>
+  </div>
+</div>
+  
 <!-- SERVICES -->
 <section id="services">
   <div class="section-inner">
