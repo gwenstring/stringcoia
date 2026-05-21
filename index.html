@@ -945,27 +945,31 @@
         </div>
       </div>
       <div class="example-card">
-        <div class="example-thumb">
-          <div class="example-thumb-bg" aria-hidden="true"></div>
-          <div class="play-btn"><div class="play-icon"></div></div>
-        </div>
+        <a href="https://youtu.be/eMvSe_9BwU8" target="_blank" rel="noopener" aria-label="Watch Service Business example video">
+          <div class="example-thumb">
+            <div class="example-thumb-bg" aria-hidden="true"></div>
+            <div class="play-btn"><div class="play-icon"></div></div>
+          </div>
+        </a>
         <div class="example-body">
           <span class="example-tag">Service Business</span>
           <h3>Local Service Business Ad</h3>
           <p>A 60-second promotional video showcasing a small service-based LLC — brand story, key offerings, and a clear call to action.</p>
-          <a href="#contact" class="example-link">Request a sample →</a>
+          <a href="https://youtu.be/eMvSe_9BwU8" target="_blank" rel="noopener" class="example-link">Watch on YouTube →</a>
         </div>
       </div>
       <div class="example-card">
-        <div class="example-thumb">
-          <div class="example-thumb-bg" aria-hidden="true"></div>
-          <div class="play-btn"><div class="play-icon"></div></div>
-        </div>
+        <a href="https://youtu.be/-eH7xJosr7A" target="_blank" rel="noopener" aria-label="Watch S-Corp Launch example video">
+          <div class="example-thumb">
+            <div class="example-thumb-bg" aria-hidden="true"></div>
+            <div class="play-btn"><div class="play-icon"></div></div>
+          </div>
+        </a>
         <div class="example-body">
           <span class="example-tag">S-Corp Launch</span>
           <h3>Startup Brand Video</h3>
           <p>A 2-minute brand video introducing a newly incorporated S-corp to their target market, with logo integration and custom voiceover.</p>
-          <a href="#contact" class="example-link">Request a sample →</a>
+          <a href="https://youtu.be/-eH7xJosr7A" target="_blank" rel="noopener" class="example-link">Watch on YouTube →</a>
         </div>
       </div>
     </div>
@@ -1142,42 +1146,44 @@
       </div>
       <div class="contact-form-section">
         <h3>Send us a message</h3>
-        <div class="form-row">
-          <div class="form-field">
-            <label for="fname">First name</label>
-            <input type="text" id="fname" placeholder="Jane"/>
+        <form action="https://formspree.io/f/xqejqdvz" method="POST" onsubmit="handleSubmit(event)">
+          <div class="form-row">
+            <div class="form-field">
+              <label for="fname">First name</label>
+              <input type="text" id="fname" name="first_name" placeholder="Jane" required/>
+            </div>
+            <div class="form-field">
+              <label for="lname">Last name</label>
+              <input type="text" id="lname" name="last_name" placeholder="Smith"/>
+            </div>
           </div>
           <div class="form-field">
-            <label for="lname">Last name</label>
-            <input type="text" id="lname" placeholder="Smith"/>
+            <label for="email">Email address</label>
+            <input type="email" id="email" name="email" placeholder="jane@yourbusiness.com" required/>
           </div>
-        </div>
-        <div class="form-field">
-          <label for="email">Email address</label>
-          <input type="email" id="email" placeholder="jane@yourbusiness.com"/>
-        </div>
-        <div class="form-field">
-          <label for="biz">Business name</label>
-          <input type="text" id="biz" placeholder="Your LLC or S-corp name"/>
-        </div>
-        <div class="form-field">
-          <label for="service">Service interested in</label>
-          <select id="service">
-            <option value="">Select a service…</option>
-            <option>Startup Spotlight — $149</option>
-            <option>Growth Ad — $299</option>
-            <option>Brand Bundle — $599</option>
-            <option>Social Media Shorts — $99</option>
-            <option>Nonprofit Special</option>
-            <option>Ad Campaign Package</option>
-            <option>Not sure yet</option>
-          </select>
-        </div>
-        <div class="form-field">
-          <label for="message">Tell us about your business</label>
-          <textarea id="message" placeholder="What does your business do, who are your customers, and what do you want your video to achieve?"></textarea>
-        </div>
-        <button class="form-submit" onclick="handleSubmit(event)">Send message →</button>
+          <div class="form-field">
+            <label for="biz">Business name</label>
+            <input type="text" id="biz" name="business_name" placeholder="Your LLC or S-corp name"/>
+          </div>
+          <div class="form-field">
+            <label for="service">Service interested in</label>
+            <select id="service" name="service">
+              <option value="">Select a service…</option>
+              <option>Startup Spotlight — $149</option>
+              <option>Growth Ad — $299</option>
+              <option>Brand Bundle — $599</option>
+              <option>Social Media Shorts — $99</option>
+              <option>Nonprofit Special</option>
+              <option>Ad Campaign Package</option>
+              <option>Not sure yet</option>
+            </select>
+          </div>
+          <div class="form-field">
+            <label for="message">Tell us about your business</label>
+            <textarea id="message" name="message" placeholder="What does your business do, who are your customers, and what do you want your video to achieve?"></textarea>
+          </div>
+          <button type="submit" class="form-submit" id="submitBtn">Send message →</button>
+        </form>
       </div>
     </div>
   </div>
@@ -1210,23 +1216,33 @@
     });
   });
 
-  // form submit handler
-  function handleSubmit(e) {
-    const btn = e.target;
-    const email = document.getElementById('email').value;
-    const fname = document.getElementById('fname').value;
-    if (!fname || !email) {
-      btn.textContent = 'Please fill in your name and email';
-      btn.style.background = '#c0392b';
-      setTimeout(() => {
-        btn.textContent = 'Send message →';
-        btn.style.background = '';
-      }, 2500);
-      return;
-    }
-    btn.textContent = '✓ Message sent! We\'ll be in touch soon.';
-    btn.style.background = '#1a9e4a';
+  // form submit handler with Formspree
+  async function handleSubmit(e) {
+    e.preventDefault();
+    const btn = document.getElementById('submitBtn');
+    const form = e.target;
+    btn.textContent = 'Sending…';
     btn.disabled = true;
+    try {
+      const response = await fetch('https://formspree.io/f/xqejqdvz', {
+        method: 'POST',
+        body: new FormData(form),
+        headers: { 'Accept': 'application/json' }
+      });
+      if (response.ok) {
+        btn.textContent = '✓ Message sent! We\'ll be in touch soon.';
+        btn.style.background = '#1a9e4a';
+        form.reset();
+      } else {
+        btn.textContent = 'Something went wrong — please email us directly.';
+        btn.style.background = '#c0392b';
+        btn.disabled = false;
+      }
+    } catch (err) {
+      btn.textContent = 'Something went wrong — please email us directly.';
+      btn.style.background = '#c0392b';
+      btn.disabled = false;
+    }
   }
 
   // staggered fade-in on scroll
