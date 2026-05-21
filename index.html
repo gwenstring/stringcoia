@@ -829,21 +829,19 @@
       </div>
     </div>
     <div class="hero-visual" aria-hidden="true">
-      <a href="https://youtu.be/47iWxW2DlOk" target="_blank" rel="noopener">
-      <div class="hero-logo-ring">
-        <div class="hero-logo-center">
-          <svg width="160" height="160" viewBox="0 0 110 110">
-            <circle cx="55" cy="55" r="55" fill="#1a6bff"/>
-            <polygon points="40,32 82,55 40,78" fill="#fff"/>
-            <path d="M90 28 Q108 40 108 55 Q108 70 90 82" fill="none" stroke="#1a6bff" stroke-width="6" stroke-linecap="round"/>
-            <path d="M97 19 Q120 33 120 55 Q120 77 97 91" fill="none" stroke="#1a6bff" stroke-width="3.5" stroke-linecap="round" opacity="0.5"/>
-            <path d="M104 12 Q132 28 132 55 Q132 82 104 98" fill="none" stroke="#1a6bff" stroke-width="1.8" stroke-linecap="round" opacity="0.25"/>
-            <polygon points="82,18 86,27 96,27 88,33 91,43 82,37 73,43 76,33 68,27 78,27" fill="#FFD600"/>
-          </svg>
-        </div>
-      </div></a>
+  <div class="hero-logo-ring">
+    <div class="hero-logo-center">
+      <svg width="160" height="160" viewBox="0 0 110 110">
+        <circle cx="55" cy="55" r="55" fill="#1a6bff"/>
+        <polygon points="40,32 82,55 40,78" fill="#fff"/>
+        <path d="M90 28 Q108 40 108 55 Q108 70 90 82" fill="none" stroke="#1a6bff" stroke-width="6" stroke-linecap="round"/>
+        <path d="M97 19 Q120 33 120 55 Q120 77 97 91" fill="none" stroke="#1a6bff" stroke-width="3.5" stroke-linecap="round" opacity="0.5"/>
+        <path d="M104 12 Q132 28 132 55 Q132 82 104 98" fill="none" stroke="#1a6bff" stroke-width="1.8" stroke-linecap="round" opacity="0.25"/>
+        <polygon points="82,18 86,27 96,27 88,33 91,43 82,37 73,43 76,33 68,27 78,27" fill="#FFD600"/>
+      </svg>
     </div>
   </div>
+</div>
 </section>
 
 <!-- SERVICES -->
@@ -1228,6 +1226,19 @@
 </footer>
 
 <script>
+  function openVideo(e) {
+  e.preventDefault();
+  const modal = document.getElementById('videoModal');
+  document.getElementById('videoFrame').src = 'https://www.youtube.com/embed/47iWxW2DlOk?rel=0&modestbranding=1&autoplay=1';
+  modal.style.display = 'flex';
+}
+
+function closeVideo() {
+  const modal = document.getElementById('videoModal');
+  modal.style.display = 'none';
+  document.getElementById('videoFrame').src = '';
+}
+  
   // smooth active nav
   const sections = document.querySelectorAll('section[id]');
   const navLinks = document.querySelectorAll('.nav-links a');
