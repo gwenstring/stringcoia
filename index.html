@@ -44,7 +44,7 @@
     .hero-stat strong { display: block; font-family: 'Syne', sans-serif; font-size: 2rem; font-weight: 800; color: var(--white); }
     .hero-stat span { font-size: 12px; font-weight: 300; color: rgba(255,255,255,0.4); text-transform: uppercase; letter-spacing: 1px; }
     .hero-visual { display: flex; align-items: center; justify-content: center; position: relative; cursor: pointer; }
-    .hero-logo-ring { width: 320px; height: 320px; border-radius: 50%; background: rgba(26,107,255,0.08); border: 1px solid rgba(26,107,255,0.2); display: flex; align-items: center; justify-content: center; position: relative; animation: spin-slow 20s linear infinite; }
+    .hero-logo-ring { width: 220px; height: 220px; border-radius: 50%; background: rgba(26,107,255,0.08); border: 1px solid rgba(26,107,255,0.2); display: flex; align-items: center; justify-content: center; position: relative; animation: spin-slow 20s linear infinite; }
     .hero-logo-ring::before { content: ''; position: absolute; inset: 12px; border-radius: 50%; border: 1px solid rgba(26,107,255,0.12); }
     @keyframes spin-slow { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
     .hero-logo-center { animation: spin-slow 20s linear infinite reverse; }
@@ -154,7 +154,7 @@
       section { padding: 72px 20px; }
       .hero { padding: 100px 20px 60px; }
       .hero-inner { grid-template-columns: 1fr; gap: 48px; }
-      .hero-visual { display: none; }
+      .hero-visual { display: flex; justify-content: center; margin-top: 32px; }
       .why-grid { grid-template-columns: 1fr; gap: 40px; }
       .contact-grid { grid-template-columns: 1fr; gap: 32px; }
       .form-row { grid-template-columns: 1fr; }
